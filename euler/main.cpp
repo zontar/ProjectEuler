@@ -1,5 +1,5 @@
 #include <fstream>
-#include <ctime>
+#include <windows.h>
 #include "task.h"
 
 extern const std::string taskName;
@@ -10,13 +10,19 @@ int main()
 	fileName += taskName;
 	fileName += ".txt";
 	std::freopen(fileName.data(), "w", stdout);
-	clock_t bTime = clock();
-	std::cout << "run on " << bTime << std::endl;
+
+	LARGE_INTEGER bTime, eTime, freq, elapsed;
+
+	QueryPerformanceFrequency(&freq); 
+	QueryPerformanceCounter(&bTime);
+	std::cout << "run on " << bTime.QuadPart << std::endl;
 	std::cout				<< "----------------------------------------------------------------------------" << std::endl;
 	run();
-	clock_t eTime = clock();
+	QueryPerformanceCounter(&eTime);
+	elapsed.QuadPart = eTime.QuadPart - bTime.QuadPart;
 	std::cout << std::endl	<< "----------------------------------------------------------------------------" << std::endl;
-	std::cout << "finished on " << eTime << std::endl;
-	std::cout << "ticks: " << eTime-bTime << "; time: " << (double)(eTime-bTime)/CLOCKS_PER_SEC <<  std::endl;
+	std::cout << "finished on " << eTime.QuadPart << std::endl;
+	std::cout << "ticks: " << elapsed.QuadPart << "; time: " << (double)elapsed.QuadPart / freq.QuadPart * 1000000.0 <<  std::endl;
+	
 	return 0;
 }

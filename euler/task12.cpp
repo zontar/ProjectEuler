@@ -17,7 +17,7 @@ What is the value of the first triangle number to have over five hundred divisor
 */
 
 IntVector primes;
-const uint N = 100000000;
+const uint N = 50000;
 uint lp[N+1];
 
 void getPrimes()

@@ -61,7 +61,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="task10.cpp" />
+    <ClCompile Include="task12.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="task.h" />
